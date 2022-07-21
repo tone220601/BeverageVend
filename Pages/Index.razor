@@ -1,0 +1,36 @@
+﻿@page "/"
+@inherits BeverageBase
+
+<div style="position:center; padding:10px 0px 10px;">
+    <div class="btn-group" >
+        @foreach (var item in types)
+        {
+            if (Array.IndexOf(types, item) == selected)
+            {
+                <button class="btn btn-primary" @onclick="()=> selected=Array.IndexOf(types,item)" disabled="@isDisabled">@item.Name</button>
+            }
+            else
+            {
+                <button class="btn btn-secondary" @onclick="()=> selected=Array.IndexOf(types,item)" disabled="@isDisabled">@item.Name</button>
+            }
+        }
+    </div>   
+</div>
+
+@GetRenderFragment(types[selected])
+@code
+{
+        RenderFragment GetRenderFragment(Type type)
+        {
+            RenderFragment renderFragment = renderTreeBuilder =>
+            {
+                renderTreeBuilder.OpenComponent(selected, type);
+                renderTreeBuilder.CloseComponent();
+            };
+            return renderFragment;
+        }
+     
+        ComponentBase[] components = { new Coffee(), new Tea(), new Chocolate() };
+        Type[] types => components.Select(s => s.GetType()).ToArray();
+
+}

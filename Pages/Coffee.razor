@@ -1,0 +1,17 @@
+﻿@inherits BeverageBase
+
+<div style="position:center; padding:10px 0px 20px;">
+    <div>
+        <label style="font-family:Lucida Handwriting; padding-right:10px">Would you like milk </label>
+        <input type="checkbox" @bind="vend.Milk" />
+    </div>
+    <div>
+        <label style="font-family:Lucida Handwriting; padding-right:10px">Would you like sugar </label>
+        <input class="form-check-input" type="checkbox"   @bind="vend.Sugar" />
+    </div> 
+</div>
+<div>
+    <button class="btn btn-primary" style="padding-right:10px" @onclick="() => Coffee()" disabled="@isDisabled">Create beverage</button>
+</div>
+
+
